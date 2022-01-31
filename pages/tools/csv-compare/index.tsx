@@ -140,7 +140,7 @@ const CsvCompare: NextPage = (props: any) => {
       }
 
     return (
-        <DashboardLayout sidebar={false}>
+        <DashboardLayout sidebar={true}>
             <ToastContainer
                 position="top-right"
                 autoClose={3000}
@@ -245,7 +245,7 @@ const CsvCompare: NextPage = (props: any) => {
             </div>
 
             {/* New Compare Modal */}
-            <Dialog showHeader={false} contentClassName={styles.modelsCustomStyles} maskClassName={styles.dialogMask} visible={newCompareModal} style={{ width: '500px', }} onHide={() => ''}>
+            <Dialog showHeader={false} contentClassName={styles.modelsCustomStyles} maskClassName={styles.dialogMask} visible={newCompareModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden"}} onHide={() => ''}>
                 <Formik
                     enableReinitialize
                     initialValues={{
@@ -334,7 +334,7 @@ const CsvCompare: NextPage = (props: any) => {
             </Dialog>
 
             {/* Column Mapping Modal */}
-            <Dialog showHeader={false} contentClassName={styles.modelsCustomStyles} maskClassName={styles.dialogMask} visible={columnMappingModal} style={{ width: '500px', }} onHide={() => ''}>
+            <Dialog showHeader={false} contentClassName={styles.modelsCustomStyles} maskClassName={styles.dialogMask} visible={columnMappingModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden"}} onHide={() => ''}>
                 <div className={styles.replaceDataModal}>
                     <h5>Column Mapping (Match the Registry columns with CSV)</h5>
                     <div className={styles.inputFields}>
@@ -382,7 +382,7 @@ const CsvCompare: NextPage = (props: any) => {
             </Dialog>
 
             {/* Add New Field-Modal */}
-            <Dialog showHeader={false} contentClassName={styles.addNewFieldModalCustomStyles} maskClassName={styles.dialogMask} visible={addNewFieldModal} style={{ width: '500px', }} onHide={() => ''}>
+            <Dialog showHeader={false} contentClassName={styles.addNewFieldModalCustomStyles} maskClassName={styles.dialogMask} visible={addNewFieldModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden"}} onHide={() => ''}>
                 <div className={styles.addNewFieldModal}>
                     <h5>Add new field</h5>
                     <Formik

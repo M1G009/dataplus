@@ -14,14 +14,15 @@ import { Dialog } from 'primereact/dialog';
 import { FiUpload } from 'react-icons/fi';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
 
 // 3rd Party Imports
 import * as yup from 'yup';
 import { AiOutlineSwap } from "react-icons/ai";
 import { ErrorMessage, Formik, FieldArray, Field, FormikHelpers } from 'formik';
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaExchangeAlt } from "react-icons/fa";
+import { BiCog } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
-import { InputText } from 'primereact/inputtext';
 import { FiFilter } from "react-icons/fi";
 import { RiCloseLine } from "react-icons/ri";
 import { ToastContainer } from "react-toastify";
@@ -90,6 +91,7 @@ const Dashboard: NextPage = () => {
   const [createContactTableSpinner, setCreateContactTableSpinner] = useState(false);
   const [addNewFieldModal, setAddNewFieldModal] = useState(false);
   const [replaceDataModal, setReplaceDataModal] = useState(false);
+  const [exportDataModal, setExportDataModal] = useState(false);
   const [initialValues, setInitialValues] = useState<DynamicFields>()
   const [types, setTypes] = useState<DynamicFields>()
   const [columns, setColumns] = useState<TableColumns[]>([])
@@ -110,9 +112,12 @@ const Dashboard: NextPage = () => {
   const [searchField, setSearchField] = useState('');
   const [perPage, setPerPage] = useState(10);
   const [dataType, setDataType] = useState(["text", "email", "date", "number", "textarea", "checkbox"])
+  const [exportTypes, setExportTypes] = useState([".csv", ".pdf"])
+  const [exportType, setExportType] = useState(".csv")
   const [contacts, setContacts] = useState<any[]>([]);
   const [showFieldsData, setShowFieldsData] = useState<any>(null);
   const [replaceColumn, setReplaceColumn] = useState(true)
+  const [exportAllColumns, setExportAllColumns] = useState(true)
 
   const fetchAllContact = async (page: number, limit: number, filter: any, search: string, sort: any) => {
     try {
@@ -280,16 +285,11 @@ const Dashboard: NextPage = () => {
 
   const items = [
     {
-      label: 'Replace Data',
-      className: styles.menuItem,
-      command: () => { setReplaceDataModal(true) }
-    },
-    {
-      label: 'Export in CSV',
+      label: 'Export',
       className: `${styles.menuItem} ${styles.dropMenu}`,
       items: [
         {
-          label: 'Export in CSV',
+          label: 'CSV',
           command: () => { exportCsvGenerator() }
         }
       ]
@@ -791,7 +791,7 @@ const Dashboard: NextPage = () => {
   }
 
   return (
-    <DashboardLayout sidebar={false}>
+    <DashboardLayout sidebar={true}>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -806,11 +806,16 @@ const Dashboard: NextPage = () => {
       <div className={styles.topBar}>
         <h5>My Registry</h5>
         <div className={styles.btnGroup}>
+          <div className={styles.menubar}>
+            <button className={styles.btnItem} onClick={() => { setReplaceDataModal(true) }}><FaExchangeAlt /> Replace Data</button>
+            <button className={styles.btnItem} onClick={() => { setReplaceDataModal(true) }}><BiCog /> Table Settings</button>
+          </div>
           {
-            contacts.length ? <Menubar
-              model={items}
-              className={styles.menubar}
-            /> : ''
+            contacts.length ?
+              <Menubar
+                model={items}
+                className={styles.menubar}
+              /> : ''
           }
         </div>
       </div>
@@ -841,10 +846,10 @@ const Dashboard: NextPage = () => {
                     <button onClick={() => setRoutingQuery('', searchField, sortingField)} className={styles.filterBtn}><RiCloseLine /></button>
                   </div>
                   :
-                  <button onClick={() => { setFilterData(true); setCreateNewContactModal(true) }} className={layoutStyles.blueBtn + " " + styles.filterBtn}>Filter <FiFilter /></button>
+                  <button onClick={() => { setFilterData(true); setCreateNewContactModal(true) }} className={layoutStyles.blueBtnOnly}><FiFilter /> Filter</button>
               }
-              <button onClick={() => setSettingDataModal(true)} className={layoutStyles.blueBtn}>Table Settings</button>
-              <button onClick={() => setAddNewFieldModal(true)} className={layoutStyles.blueBgBtn}>Add New Field</button>
+              <button onClick={() => setSettingDataModal(true)} className={layoutStyles.blueBtnOnly}><BiCog /> Table Settings</button>
+              <button onClick={() => setAddNewFieldModal(true)} className={layoutStyles.blueBtn}>Add New Field</button>
             </div>
           </div>
           <div className={styles.contectTableBox}>
@@ -879,7 +884,7 @@ const Dashboard: NextPage = () => {
             }
 
             {/* Create-Contact-Modal */}
-            <Dialog showHeader={false} onMaskClick={createContactDialogCloseHandler} className={styles.createNewContactCustomStyles} maskClassName={styles.dialogMask} position={'right'} visible={createNewContactModal} style={{ width: '500px', }} onHide={() => ''}>
+            <Dialog showHeader={false} onMaskClick={createContactDialogCloseHandler} className={styles.createNewContactCustomStyles} maskClassName={styles.dialogMask} position={'right'} visible={createNewContactModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden" }} onHide={() => ''}>
               <div className={styles.createContactModal}>
                 <h5>{editData ? "Edit Contact" : (viewData ? "View Data" : (filterData ? "Filter Data" : "Create New Contact"))}</h5>
                 {
@@ -963,7 +968,7 @@ const Dashboard: NextPage = () => {
             </Dialog>
 
             {/* Add New Field-Modal */}
-            <Dialog showHeader={false} onMaskClick={addNewFieldDialogCloseHandler} contentClassName={styles.addNewFieldModalCustomStyles} maskClassName={styles.dialogMask} visible={addNewFieldModal} style={{ width: '500px', }} onHide={() => ''}>
+            <Dialog showHeader={false} onMaskClick={addNewFieldDialogCloseHandler} contentClassName={styles.addNewFieldModalCustomStyles} maskClassName={styles.dialogMask} visible={addNewFieldModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden" }} onHide={() => ''}>
               <div className={styles.addNewFieldModal}>
                 <h5>Add new field</h5>
                 <Formik
@@ -1015,7 +1020,7 @@ const Dashboard: NextPage = () => {
             </Dialog>
 
             {/* Replace data-Modal */}
-            <Dialog showHeader={false} onMaskClick={replaceDataDialogCloseHandler} contentClassName={styles.addNewFieldModalCustomStyles} maskClassName={styles.dialogMask} visible={replaceDataModal} style={{ width: '500px', }} onHide={() => ''}>
+            <Dialog showHeader={false} onMaskClick={replaceDataDialogCloseHandler} contentClassName={styles.addNewFieldModalCustomStyles} maskClassName={styles.dialogMask} visible={replaceDataModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden" }} onHide={() => ''}>
               <div className={styles.addNewFieldModal}>
                 <Formik
                   enableReinitialize
@@ -1090,6 +1095,63 @@ const Dashboard: NextPage = () => {
                     </form>
                   )}
                 </Formik>
+              </div>
+            </Dialog>
+
+            {/* Export data-Modal */}
+            <Dialog showHeader={false} contentClassName={styles.addNewFieldModalCustomStyles} maskClassName={styles.dialogMask} visible={exportDataModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden" }} onHide={() => ''}>
+              <div className={styles.addNewFieldModal}>
+                {
+                  replaceDataSpinner ? <div className={styles.formSpinner}>
+                    <div className={styles.loading}></div>
+                  </div> : null
+                }
+                <div className={styles.replaceDataModal+" "+styles.exportModal}>
+                  <h5>Export custom columns</h5>
+                  <div className={styles.inputFields}>
+                    <div className={styles.inputBox + ' ' + styles.radioBox}>
+                      <div className="p-d-flex p-ai-center p-mr-2">
+                        <RadioButton className={styles.checkBoxes} inputId="specificcolumn" name="replacedata" value="specificcolumn" checked={exportAllColumns} onChange={(e) => { setExportAllColumns(true) }} />
+                        <label htmlFor="specificcolumn">Export all Columns</label>
+                      </div>
+                      <div className="p-d-flex p-ai-center">
+                        <RadioButton className={styles.checkBoxes} inputId="wholeregistry" name="replacedata" value="wholeregistry" checked={!exportAllColumns} onChange={(e) => { setExportAllColumns(false) }} />
+                        <label htmlFor="wholeregistry">Export only selected columns</label>
+                      </div>
+                    </div>
+                    <div className={styles.inputBox}>
+                      <label htmlFor="selectdata">Select Columns</label>
+                      <div className={styles.checkBox}>
+                        <label htmlFor=""><Checkbox name='column' /> Name</label>
+                        <label htmlFor=""><Checkbox name='column' /> Municipality of Birth</label>
+                        <label htmlFor=""><Checkbox name='column' /> Surname</label>
+                        <label htmlFor=""><Checkbox name='column' /> Date of Residence</label>
+                        <label htmlFor=""><Checkbox name='column' /> Date of Birth</label>
+                        <label htmlFor=""><Checkbox name='column' /> Family</label>
+                        <label htmlFor=""><Checkbox name='column' /> Sex</label>
+                        <label htmlFor=""><Checkbox name='column' /> Par</label>
+                        <label htmlFor=""><Checkbox name='column' /> Country of Birth</label>
+                        <label htmlFor=""><Checkbox name='column' /> Address</label>
+                      </div>
+                    </div>
+                    <div className={styles.replaceFields}>
+                      <div className={styles.inputBox+" "+styles.exportBox}>
+                        <label htmlFor="selectdata">File name</label>
+                        <div className={styles.exportFile}>
+                          <InputText placeholder="Select type of title" />
+                          <Dropdown className={styles.selectBox} name="dtype" value={exportType} options={exportTypes} onChange={(e: any) => setExportType(e.target.value)} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-d-flex p-ai-center p-mt-4">
+                      <div className="p-m-auto">
+                        <button type='button' className={layoutStyles.customBlueBgbtn}>Save</button>
+                        <button type='button' onClick={() => setExportDataModal(false)} className={layoutStyles.customBluebtn}>Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </Dialog>
 

@@ -17,7 +17,7 @@ import { ToastContainer } from "react-toastify";
 import toast from "../../components/Toast";
 import styles from '../../styles/Auth.module.scss'
 import Layout from '../../components/layout'
-import Logo from '../../public/images/logo_authentication.svg'
+import Logo from '../../public/images/auth_logo.svg'
 import { withAuthSync } from '../../utils/auth'
 
 // Interface/Helper Imports
@@ -78,15 +78,18 @@ const ForgotPassword: NextPage = () => {
         draggable
         pauseOnHover
       />
-      <div className={styles.authContainer}>
+      <div className={styles.logoBox}>
         <div className={styles.logo}>
           <Image
             src={Logo}
-            alt="Octoplus"
+            alt="Dataplus"
             width={198}
             height={48}
           />
         </div>
+      </div>
+
+      <div className={styles.authContainer + " " + styles.forgottPass}>
         <div className={styles.authForm}>
           <Formik
             initialValues={{
@@ -131,6 +134,17 @@ const ForgotPassword: NextPage = () => {
               </form>
             )}
           </Formik>
+        </div>
+        <div className={styles.waveBg}>
+          <svg className={styles.waves} xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+              <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g className={styles.parallax}>
+              <use xlinkHref="#gentle-wave" x="48" y="0" fill="#fff" />
+            </g>
+          </svg>
         </div>
       </div>
     </Layout>

@@ -49,7 +49,7 @@ const CsvCompare: NextPage = (props: any) => {
     }
 
     return (
-        <DashboardLayout sidebar={false}>
+        <DashboardLayout sidebar={true}>
             <div className={layoutStyles.topBar}>
                 <div className='p-d-flex p-ai-center p-jc-between'>
                     <div>
@@ -263,7 +263,7 @@ const CsvCompare: NextPage = (props: any) => {
             </div>
 
             {/* Assign Contact Fixing-Modal */}
-            <Dialog showHeader={false} contentClassName={styles.modelsCustomStyles} maskClassName={styles.dialogMask} visible={assignContactFixingModal} style={{ width: '500px', }} onHide={() => ''}>
+            <Dialog showHeader={false} contentClassName={styles.modelsCustomStyles} maskClassName={styles.dialogMask} visible={assignContactFixingModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden"}} onHide={() => ''}>
                 <div className={styles.replaceDataModal}>
                     <h5>Assign Contact Fixing</h5>
                     <Formik
@@ -322,7 +322,7 @@ const CsvCompare: NextPage = (props: any) => {
             </Dialog>
 
             {/* Save Contact Details Modal */}
-            <Dialog showHeader={false} contentClassName={styles.modelsCustomStyles} maskClassName={styles.dialogMask} visible={saveContactModal} style={{ width: '500px', }} onHide={() => ''}>
+            <Dialog showHeader={false} contentClassName={styles.modelsCustomStyles} maskClassName={styles.dialogMask} visible={saveContactModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden"}} onHide={() => ''}>
                 <div className={styles.replaceDataModal}>
                     <h5>Save Contact Details</h5>
                     <div className={styles.contactDetails}>

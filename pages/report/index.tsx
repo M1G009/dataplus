@@ -105,7 +105,7 @@ const CsvCompare: NextPage = (props: any) => {
     }
 
     return (
-        <DashboardLayout sidebar={false}>
+        <DashboardLayout sidebar={true}>
             <ToastContainer
                 position="top-right"
                 autoClose={3000}
@@ -205,7 +205,7 @@ const CsvCompare: NextPage = (props: any) => {
             </div>
 
             {/* Export Report Modal */}
-            <Dialog showHeader={false} contentClassName={styles.modelsCustomStyles} maskClassName={styles.dialogMask} visible={exportReportModal} style={{ width: '500px', }} onHide={() => ''}>
+            <Dialog showHeader={false} contentClassName={styles.modelsCustomStyles} maskClassName={styles.dialogMask} visible={exportReportModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden"}} onHide={() => ''}>
                 <div className={styles.replaceDataModal}>
                     <h5>Export Report</h5>
                     <div className={styles.contactDetails}>

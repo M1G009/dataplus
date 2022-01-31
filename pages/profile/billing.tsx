@@ -387,7 +387,7 @@ const Billing: NextPage = () => {
       </div>
 
       {/* Payment Card */}
-      <Dialog showHeader={false} contentClassName={styles.addCardModal} visible={addCardModal} style={{ width: '500px', }} onHide={() => ''}>
+      <Dialog showHeader={false} contentClassName={styles.addCardModal} visible={addCardModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden"}} onHide={() => ''}>
         <div className={styles.addCardModal}>
           <h5>
             {

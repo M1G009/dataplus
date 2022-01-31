@@ -3,12 +3,13 @@ import Link from 'next/link'
 import React, { Children } from 'react'
 
 const ActiveLink = ({ children, activeClassName, ...props }: any) => {
-  const { asPath } = useRouter()
+  const { pathname } = useRouter()
+  const router = useRouter()
   const child = Children.only(children)
   const childClassName = child.props.className || ''
-  
+    
   const className =
-    asPath === props.href || asPath === props.as
+    pathname === props.href || pathname === props.as
       ? `${childClassName} ${activeClassName}`.trim()
       : childClassName
 

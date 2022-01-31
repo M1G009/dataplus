@@ -1,12 +1,14 @@
 $darkBlue: #091e42;
-$lightBlue: #2236f1;
+$lightBlue: #3699ff;
 
 .topBar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fff;
-    padding: 15px;
+    padding: 16px 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    margin-bottom: 25px;
 
     h5 {
         margin: 0px;
@@ -15,10 +17,14 @@ $lightBlue: #2236f1;
     }
 
     .btnGroup {
+        display: flex;
+        align-items: center;
         .menubar {
             background-color: transparent;
             border: none;
             padding: 0px;
+            display: flex;
+            align-items: center;
 
             .menuItem {
                 margin: 0px 5px;
@@ -36,6 +42,28 @@ $lightBlue: #2236f1;
                 &.dropMenu {
                     border: 1px solid $lightBlue;
                     border-radius: 4px;
+                }
+            }
+
+            button.btnItem {
+                margin: 0px 5px;
+                box-shadow: none !important;
+                color: #3699ff !important;
+                font-weight: 500;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+
+                svg {
+                    font-size: 20px;
+                    margin-right: 5px;
+                }
+
+                &:hover {
+                    background-color: transparent !important;
                 }
             }
 
@@ -133,7 +161,7 @@ $lightBlue: #2236f1;
 
     button {
         background-color: #e4e7fd;
-        color: #2236f1;
+        color: #3699ff;
         border: none;
         font-size: 18px;
         display: flex;
@@ -149,27 +177,27 @@ $lightBlue: #2236f1;
 }
 
 .filterBtnGroup {
-    background-color: #2236f11f;
+    background-color: #3699ff1f;
     margin-left: 10px;
     border-radius: 4px;
     overflow: hidden;
 
     button {
         background-color: transparent;
-        color: #2236f1;
+        color: #3699ff;
         border: none;
         padding: 8px 15px;
         font-weight: 500;
         font-size: 16px;
         cursor: pointer;
 
-        &:first-child{
+        &:first-child {
             padding-right: 7px;
         }
 
         &:nth-child(2) {
             padding: 2px 7px;
-            &:hover{
+            &:hover {
                 background-color: #0000000f;
             }
             svg {
@@ -185,7 +213,7 @@ $lightBlue: #2236f1;
     align-items: center;
 
     svg {
-        margin-left: 5px;
+        margin-right: 5px;
     }
 }
 
@@ -318,13 +346,18 @@ $lightBlue: #2236f1;
 
 .addNewFieldModalCustomStyles {
     padding: 0px !important;
+    border-radius: 8px;
+    overflow: hidden;
     .addNewFieldModal {
         h5 {
             margin: 0px;
-            background-color: #001529;
-            font-size: 16px;
+            background-color: #3e05e199;
             color: #ffffff;
             padding: 12px;
+            font-weight: normal;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
         }
 
         .inputFields {
@@ -365,16 +398,45 @@ $lightBlue: #2236f1;
                 }
             }
         }
+
+        .checkBox {
+            padding: 18px;
+            background: #f4f5f7;
+            border: 1px solid #0000001f;
+            border-radius: 4px;
+            display: flex;
+            flex-wrap: wrap;
+
+            label {
+                width: 50%;
+                padding-right: 10px;
+            }
+        }
+
+        .exportBox{
+            width: 100%;
+            .exportFile{
+                display: flex;
+
+                input{
+                    margin-right: 20px;
+                }
+            }
+        }
+
     }
 }
 
 .replaceDataModal {
     h5 {
-        margin-bottom: 15px;
-        background-color: #001529;
-        font-size: 16px;
+        margin: 0px;
+        background-color: #3e05e199;
         color: #ffffff;
         padding: 12px;
+        font-weight: normal;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
     }
 
     .inputFields {
@@ -387,7 +449,7 @@ $lightBlue: #2236f1;
                 font-size: 35px;
                 align-self: center;
                 margin: 0px 25px;
-                color: #2236f1;
+                color: #3699ff;
             }
         }
         .inputBox {
@@ -446,6 +508,9 @@ $lightBlue: #2236f1;
     }
 }
 
+.exportModal {
+}
+
 .tableSettings {
     h5 {
         display: flex;
@@ -479,7 +544,7 @@ $lightBlue: #2236f1;
         height: 0;
         width: 0;
         padding: 15px;
-        border: 6px solid #293cf1;
+        border: 6px solid #3699ff;
         border-right-color: #0000;
         border-radius: 22px;
         -webkit-animation: rotate 1s infinite linear;
@@ -525,12 +590,12 @@ $lightBlue: #2236f1;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #2236f1;
+        color: #3699ff;
         padding: 7px 10px;
         width: max-content;
         max-width: 100%;
         margin: auto;
-        border: 2px solid #2236f1;
+        border: 2px solid #3699ff;
         border-radius: 5px;
         cursor: pointer;
 
@@ -541,7 +606,7 @@ $lightBlue: #2236f1;
     }
     .fileName {
         margin: 5px 0px 0px;
-        color: #2236f1;
+        color: #3699ff;
     }
     .CSVFileUpload {
         display: none;

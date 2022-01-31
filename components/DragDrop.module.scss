@@ -34,7 +34,7 @@
             margin-left: 8px;
             background-color: transparent;
             border: none;
-            color: #2236f1;
+            color: #3699FF;
             display: none;
             align-items: center;
             justify-content: center;
@@ -57,7 +57,7 @@
                 padding: 0px;
                 background-color: transparent;
                 border: none;
-                color: #2236f1;
+                color: #3699FF;
                 font-size: 20px;
                 display: flex;
                 align-items: center;
@@ -72,7 +72,7 @@
 
         &:focus-within {
             .inputBox {
-                border-color: #2236f1;
+                border-color: #3699FF;
             }
             .deleteIcon {
                 display: flex;

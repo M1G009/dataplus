@@ -8,12 +8,12 @@ import { Badge } from 'primereact/badge';
 import { useRouter } from 'next/router'
 import { removeCookies } from 'cookies-next';
 
-import Logo from '../public/images/main_logo.svg'
+
 import User from '../public/images/user_img.png'
 
 import styles from './DashboardLayout.module.scss'
 
-const Header = () => {
+const Header = (props: any) => {
     const router = useRouter();
     const [searchText, setSearchText] = useState('');
     const [searchInput, setSearchInput] = useState(false);
@@ -41,21 +41,6 @@ const Header = () => {
 
     return (
         <header className={styles.header}>
-            <div className={styles.logo}>
-                <Button onClick={() => routerPushHandler('/')} className={styles.logoBtn}>
-                    <Image
-                        src={Logo}
-                        alt="Octoplus"
-                        width={117}
-                        height={29}
-                    />
-                </Button>
-            </div>
-            <div className={styles.left_navlist}>
-                <Link href="/">My Registry</Link>
-                <Link href="/tools/csv-compare">Tools</Link>
-                <Link href="/report">Reports</Link>
-            </div>
             <div className={styles.right_list}>
                 <div className={styles.searchBox}>
                     {
@@ -65,11 +50,11 @@ const Header = () => {
                 </div>
                 <Button className={"p-button-text " + styles.searchIcon} ><FaRegQuestionCircle /></Button>
                 <Button className={styles.bellIcon}><i className="pi pi-bell p-overlay-badge" style={{ fontSize: '18px' }}><Badge value="2" severity="danger" ></Badge></i></Button>
-                <div className={styles.userProfile} onClick={() => routerPushHandler('/profile/account')}>
+                <div className={styles.userProfile} onClick={() => props.profile(true)} ref={props.userRef}>
                     <Image
                         src={User}
                         className={styles.userImage}
-                        alt="Octoplus"
+                        alt="Dataplus"
                         width={40}
                         height={40}
                     />

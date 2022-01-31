@@ -1,5 +1,5 @@
 $darkBlue: #091e42;
-$lightBlue: #2236f1;
+$lightBlue: #3699FF;
 
 .comparisonTableBox {
     .comparisonTableOverflow {
@@ -75,12 +75,14 @@ $lightBlue: #2236f1;
 
     .replaceDataModal {
         h5 {
-            margin-bottom: 15px;
-            background-color: #001529;
-            font-size: 16px;
+            margin: 0px;
+            background-color: #3e05e199;
             color: #ffffff;
             padding: 12px;
-            margin: 0px;
+            font-weight: normal;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
         }
 
         .inputFields {
@@ -92,7 +94,7 @@ $lightBlue: #2236f1;
                 .swapIcon {
                     font-size: 35px;
                     margin: 0px 25px;
-                    color: #2236f1;
+                    color: #3699FF;
                 }
             }
             .inputBox {
@@ -150,12 +152,12 @@ $lightBlue: #2236f1;
                 svg {
                     font-size: 22px;
                     margin-right: 5px;
-                    color: #2236f1;
+                    color: #3699FF;
                 }
             }
             .fileName {
                 margin: 5px 0px 0px;
-                color: #2236f1;
+                color: #3699FF;
             }
             .CSVFileUpload {
                 display: none;
@@ -209,7 +211,7 @@ $lightBlue: #2236f1;
                 padding: 5px 8px;
                 font-weight: 500;
                 font-size: 14px;
-                color: #2236f1;
+                color: #3699FF;
 
                 .selectBox {
                     width: 100%;
@@ -286,7 +288,7 @@ $lightBlue: #2236f1;
                 background: rgba(34, 54, 241, 0.12);
                 border-right: 4px solid #1890ff;
                 h6 {
-                    color: #2236f1;
+                    color: #3699FF;
                 }
             }
         }
@@ -332,7 +334,7 @@ $lightBlue: #2236f1;
                     background: rgba(34, 54, 241, 0.12);
                     border-right: 4px solid #1890ff;
                     h6 {
-                        color: #2236f1;
+                        color: #3699FF;
                         font-weight: 500;
                     }
                 }
@@ -456,13 +458,18 @@ $lightBlue: #2236f1;
 
 .addNewFieldModalCustomStyles {
     padding: 0px !important;
+    border-radius: 8px;
+    overflow: hidden;
     .addNewFieldModal {
         h5 {
             margin: 0px;
-            background-color: #001529;
-            font-size: 16px;
+            background-color: #3e05e199;
             color: #ffffff;
             padding: 12px;
+            font-weight: normal;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
         }
 
         .inputFields {

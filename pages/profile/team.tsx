@@ -11,11 +11,14 @@ import { Checkbox } from 'primereact/checkbox';
 import { Dropdown } from 'primereact/dropdown';
 import { Dialog } from 'primereact/dialog';
 import { confirmDialog } from 'primereact/confirmdialog';
+import { RadioButton } from 'primereact/radiobutton';
 
 // 3rd Party Imports
 import * as yup from 'yup';
 import { ErrorMessage, Formik, Field, FormikHelpers } from 'formik';
 import { BsCheck2Square, BsSquare } from "react-icons/bs";
+import { BiTrashAlt } from 'react-icons/bi';
+import { FiEdit3 } from 'react-icons/fi';
 import { ToastContainer } from "react-toastify";
 import slugify from 'slugify'
 import toast from "../../components/Toast";
@@ -114,7 +117,8 @@ const Team: NextPage = (props: any) => {
   const [roleNames, setRoleNames] = useState<RoleNames[]>([]);
   const [roleData, setRoleData] = useState<RoleData[]>();
   const [teamMember, setTeamMember] = useState<TeamMember[]>([])
-  const [editScopeSpinner, setEditScopeSpinner] = useState(false)
+  const [editScopeSpinner, setEditScopeSpinner] = useState(false);
+  const [createRoleRadio, setCreateRoleRadio] = useState(true);
 
   // States Ends
   const fetchAllRoles = async () => {
@@ -193,10 +197,10 @@ const Team: NextPage = (props: any) => {
 
   const addScopeHandler = () => {
     let newScope = { ...addScopeData };
-    let slug = slugify(newScope['name'], { replacement: '-', remove: undefined, lower: true, strict: false, locale: 'vi', trim: true})
+    let slug = slugify(newScope['name'], { replacement: '-', remove: undefined, lower: true, strict: false, locale: 'vi', trim: true })
     newScope['slug'] = slug;
-    
-    
+
+
     const isEmpty = Object.values(newScope).some(el => el === '');
 
     if (!isEmpty) {
@@ -513,7 +517,7 @@ const Team: NextPage = (props: any) => {
               <div className={layoutStyles.head}>
                 <h4>Team Members <span>({teamMember.length})</span></h4>
                 <div className={layoutStyles.editButtons}>
-                  <button onClick={() => setCreateRole(true)} className={layoutStyles.blueBtn}>Create & Edit Role</button>
+                  <button onClick={() => setCreateRole(true)} className={layoutStyles.blueBtn}>Create/Edit Roles</button>
                   <button onClick={() => setInvitePeopleModal(true)} className={layoutStyles.blueBgBtn}>Invite People</button>
                 </div>
               </div>
@@ -527,6 +531,11 @@ const Team: NextPage = (props: any) => {
                     </tr>
                   </thead>
                   <tbody>
+                    <tr>
+                      <td>Alexandar Graham <span className={styles.invitedTag}>Invited</span></td>
+                      <td>alexander@octoplus.com</td>
+                      <td>Owner</td>
+                    </tr>
                     {
                       teamMember.length ?
                         teamMember.map((el, i) => {
@@ -561,7 +570,7 @@ const Team: NextPage = (props: any) => {
             :
             <div className={layoutStyles.headContentBox}>
               <div className={layoutStyles.head}>
-                <h4>Create & Edit Role</h4>
+                <h4>Role</h4>
                 <div className={layoutStyles.editButtons}>
                   {
                     (selectRoleName.label && selectRoleName.id) ? <button onClick={deleteRoleConfirmHandler} className={layoutStyles.customRedBgbtn}>Delete</button> : null
@@ -571,12 +580,25 @@ const Team: NextPage = (props: any) => {
                 </div>
               </div>
               <div className={layoutStyles.textBox + ' ' + styles.roleNameBox}>
+                <div className={styles.inputBox + ' ' + styles.createRoleSelect}>
+                  <div className="p-d-flex p-ai-center p-mr-2">
+                    <RadioButton className={styles.checkBoxes} inputId="specificcolumn" name="replacedata" value="specificcolumn" checked={createRoleRadio} onChange={(e) => { setCreateRoleRadio(true) }} />
+                    <label htmlFor="specificcolumn">Create New Role</label>
+                  </div>
+                  <div className="p-d-flex p-ai-center">
+                    <RadioButton className={styles.checkBoxes} inputId="wholeregistry" name="replacedata" value="wholeregistry" checked={!createRoleRadio} onChange={(e) => { setCreateRoleRadio(false) }} />
+                    <label htmlFor="wholeregistry">Edit a Role</label>
+                  </div>
+                </div>
                 <div className={styles.inputBox}>
-                  <label htmlFor="rolename">Role Name</label>
-                  <div className='p-d-flex w-100 p-ai-center'>
-                    <InputText id="rolename" name="rolename" type="text" placeholder='Create new role' value={createRoleName} onChange={(e) => createNewDataInputHandler(e)} />
-                    <span className='p-mx-2'>or</span>
-                    <Dropdown className={styles.selectRoleDropdown} value={selectRoleName.label} options={roleNames} onChange={(e) => selectEditRoleHandler(e)} placeholder="Select a Role" />
+                  <label htmlFor={"rolename"}>Role Name</label>
+                  <div className='p-d-flex w-50 p-ai-center'>
+                    {
+                      createRoleRadio ?
+                        <InputText id="rolename" name="rolename" type="text" placeholder='Create new role' value={createRoleName} onChange={(e) => createNewDataInputHandler(e)} />
+                        :
+                        <Dropdown className={styles.selectRoleDropdown} value={selectRoleName.label} options={roleNames} onChange={(e) => selectEditRoleHandler(e)} placeholder="Select a Role" />
+                    }
                   </div>
                 </div>
               </div>
@@ -589,7 +611,6 @@ const Team: NextPage = (props: any) => {
                   }
                   <div className={styles.inputBox}>
                     <label htmlFor="name">Scope Name</label>
-                    {/* <InputText id="name" name="name" type="text" value={addScopeData.name} onChange={(e) => addScopeFieldsHandler(e.target.name, e.target.value, false)} /> */}
                     <Dropdown className={styles.selectRoleDropdown} id="name" name='name' value={addScopeData.name} options={selectScopeName} onChange={(e) => addScopeFieldsHandler(e.target.name, e.target.value, false)} placeholder="Select a Scope" />
                   </div>
                   <div className={styles.radioButtons}>
@@ -611,7 +632,7 @@ const Team: NextPage = (props: any) => {
                     </div>
                   </div>
                   <div className="p-mt-3 p-mx-auto">
-                    <button onClick={addScopeHandler} className={layoutStyles.customBluebtn + ' p-m-auto'}>{editScopeIndex >= 0 ? "Save Edit" : "Add Scope"}</button>
+                    <button onClick={addScopeHandler} className={'p-m-auto '+styles.addScopeBtn}>{editScopeIndex >= 0 ? "Save Edit" : "Add Scope"}</button>
                   </div>
                 </div>
               </div>
@@ -620,7 +641,6 @@ const Team: NextPage = (props: any) => {
                   <thead>
                     <tr>
                       <th>Scope name</th>
-                      <th>Scope slug</th>
                       <th>Create</th>
                       <th>Read</th>
                       <th>Update</th>
@@ -638,7 +658,6 @@ const Team: NextPage = (props: any) => {
                         [...createRoleScopeData.scopes].map((el, i) => {
                           return <tr key={"create_role" + i}>
                             <td>{el.name}</td>
-                            <td>{el.slug}</td>
                             <td>
                               {
                                 el.access.create ?
@@ -671,9 +690,9 @@ const Team: NextPage = (props: any) => {
                                   <BsSquare />
                               }
                             </td>
-                            <td>
-                              <button onClick={() => editScopeHandler(i)} className={layoutStyles.customBluebtn + ' p-m-1'}>Edit</button>
-                              <button onClick={() => deleteScopeHandler(i)} className={layoutStyles.customRedbtn + ' p-m-1'}>Delete</button>
+                            <td className='p-d-flex p-ai-center p-jc-center'>
+                              <button onClick={() => editScopeHandler(i)} className={styles.editBtn + ' p-m-1'}><FiEdit3 />Edit</button>
+                              <button onClick={() => deleteScopeHandler(i)} className={styles.deleteBtn + ' p-m-1'}><BiTrashAlt /> Delete</button>
                             </td>
                           </tr>
                         })
@@ -686,7 +705,7 @@ const Team: NextPage = (props: any) => {
       </div>
 
       {/* Invite People */}
-      <Dialog showHeader={false} contentClassName={styles.invitePeopleModal} visible={invitePeopleModal} style={{ width: '500px', }} onHide={() => ''}>
+      <Dialog showHeader={false} contentClassName={styles.invitePeopleModal} visible={invitePeopleModal} style={{ width: '500px', borderRadius: "8px", overflow: "hidden" }} onHide={() => ''}>
         <div className={styles.invitePeopleModal}>
           <h5>Invite People</h5>
           <Formik

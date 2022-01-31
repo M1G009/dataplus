@@ -258,7 +258,7 @@ const Login: NextPage = () => {
           </div>
           <div className={layoutStyles.textBox}>
             <div className={styles.deleteAccForm}>
-              <p>By deleting your account, you'll no longer be able to access any of your data or log in to Octoplus.</p>
+              <p>By deleting your account, you'll no longer be able to access any of your data or log in to Dataplus.</p>
               <button onClick={deleteConfirm} className={styles.deleteBtn}>Delete Account</button>
             </div>
           </div>
