@@ -334,8 +334,12 @@ $XXLarge: 1600px;
                 color: #ffffff;
                 text-shadow: 0px 0px 15px #00000038;
 
-                @media (max-width: 1200px){
+                @media (max-width: 1339px){
                     font-size: 55px;
+                }
+
+                @media (max-width: 1200px){
+                    font-size: 42px;
                 }
 
                 @media (max-width: 991px){
@@ -409,7 +413,7 @@ $XXLarge: 1600px;
 .waveBg {
     position: absolute;
     inset: auto 0 0 0;
-    height: 80vh;
+    height: 90%;
     background: linear-gradient(-45deg, #093954, #2436aa, #1b1c6f, #075d80);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
@@ -477,6 +481,6 @@ $XXLarge: 1600px;
     }
 
     @media (max-width: 1200px){
-        height: 85vh;
+        height: 85%;
     }
 }
